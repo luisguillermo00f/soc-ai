@@ -1,0 +1,40 @@
+# Despliegue en Render (Blueprint). Render → New → Blueprint → elegir este repositorio.
+services:
+  - type: web
+    name: soc-ai
+    runtime: node
+    plan: starter            # el disco persistente requiere plan de pago; en "free" la base se borra al reiniciar
+    region: virginia
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/auth/state
+    disk:
+      name: soc-ai-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: SOC_AI_DB
+        value: /var/data/soc-ai.db
+      - key: SOC_AI_SECRET
+        generateValue: true  # cifra los eventos y seudonimiza trabajadores; no cambiarlo después
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        value: Equipo SOC
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      # "1" muestra el botón "Entrar sin contraseña": cualquiera con el enlace entra como administrador.
+      - key: SOC_AI_OPEN_ACCESS
+        value: "0"

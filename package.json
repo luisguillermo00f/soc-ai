@@ -1,0 +1,43 @@
+{
+  "name": "soc-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SOC AI: inteligencia de accidentalidad laboral para Salud Ocupacional del Caribe",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node --disable-warning=ExperimentalWarning --watch-path=server --watch-path=shared server/index.ts",
+    "build": "vite build",
+    "start": "node --disable-warning=ExperimentalWarning server/index.ts --production",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "user:create": "node --disable-warning=ExperimentalWarning server/cli/create-user.ts",
+    "check:ai": "node --disable-warning=ExperimentalWarning scripts/check-ai-schemas.ts",
+    "check:verifier": "node --disable-warning=ExperimentalWarning scripts/check-verifier.ts",
+    "engine:summary": "node --disable-warning=ExperimentalWarning scripts/engine-summary.ts",
+    "check:providers": "node --disable-warning=ExperimentalWarning scripts/check-providers.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@tanstack/react-query": "^5.104.1",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "multer": "^2.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.3.0",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3"
+  }
+}
